@@ -1,0 +1,34 @@
+# Don't check auto-generated stuff into git
+coverage
+build
+node_modules
+stats.json
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea
+
+### Intellij
+**.iml
+
+### NPM
+node_modules/**
+yarn-error.log
+
+### COMPASS
+.sass-cache
+/.tmp
+
+# build
+built.dev.*
+*.map
+dist
+templates.js
+/.vs
+
+.env
+apidoc
+log
+uploads
+package-lock.json
