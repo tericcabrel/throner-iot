@@ -1,5 +1,5 @@
 {
-  "name": "express-mongo-mocha-boilerplate",
+  "name": "throner-iot",
   "version": "1.0.0",
   "description": "This is a full stack boilerplate project with ExpressJS + MongoDB + Mocha",
   "scripts": {
@@ -8,9 +8,7 @@
     "serve": "node dist/server.js",
     "start_babel": "babel-node ./server.js --preset=babel-preset-es2015",
     "test": "mocha --compilers js:babel-core/register ./tests --recursive",
-    "lint": "eslint .",
-    "api-designer": "api-designer --port 4000",
-    "apidoc": "node /doc/doc-script.js doc"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
