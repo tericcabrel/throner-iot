@@ -10,6 +10,7 @@ import morgan from 'morgan';
 import logger from './core/logger/app-logger';
 import RabbitConnectionManager from './core/messaging/rabbitConnectionManager';
 import rabbitHandler from './core/messaging/rabbitHandler';
+import mainController from './controllers/main.controller';
 
 const port = process.env.SERVER_PORT;
 
@@ -29,8 +30,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev', { stream: logger.stream }));
 
-rabbitConnection();
-
-server.listen(port, () => {
+server.listen(port, async () => {
   logger.info(`Server started - ${port}`, 1);
+
+  await rabbitConnection();
+
+  await mainController.folderWatchDaemon();
 });

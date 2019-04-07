@@ -1,16 +1,25 @@
 require('dotenv').config();
 
 import path from 'path';
-import * as fs from 'fs';
 import * as winston from 'winston';
+import * as fs from 'fs';
+
 import * as rotate from 'winston-daily-rotate-file';
 
 const dir = path.join(__dirname, process.env.LOG_FILE_DIR);
 
-const logger = {};
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
 
-const localLogger = new winston.Logger({
+const logger = winston.createLogger({
   level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf((info) => {
+      return `${info.timestamp} ${info.level}: ${info.message}`;
+    })
+  ),
   transports: [
     new (winston.transports.Console)({
       colorize: true,
@@ -20,21 +29,9 @@ const localLogger = new winston.Logger({
       dirname: dir,
       maxsize: 20971520, // 20MB
       maxFiles: 25,
-      datePattern: '.dd-MM-yyyy',
+      datePattern: 'YYYY-MM-DD',
     }),
   ],
 });
-
-logger.error = (message) => {
-  localLogger.error((message.stack) ? message.stack : message);
-};
-
-logger.info = (message) => {
-  localLogger.info(message);
-};
-
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir);
-}
 
 export default logger;

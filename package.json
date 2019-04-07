@@ -24,6 +24,7 @@
   "dependencies": {
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
+    "basic-ftp": "^3.4.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.2",
     "cors": "^2.8.0",
@@ -50,9 +51,10 @@
     "socket.io": "^2.1.1",
     "translate": "^1.0.3",
     "uninstall": "0.0.0",
+    "unirest": "^0.6.0",
     "uuid": "^3.3.2",
-    "winston": "^2.3.1",
-    "winston-daily-rotate-file": "^1.4.6",
+    "winston": "3.2.1",
+    "winston-daily-rotate-file": "3.6.0",
     "xhr-request": "^1.1.0"
   },
   "devDependencies": {
