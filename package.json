@@ -24,7 +24,6 @@
   "dependencies": {
     "amqplib": "^0.5.3",
     "axios": "^0.18.0",
-    "basic-ftp": "^3.4.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.2",
     "cors": "^2.8.0",
