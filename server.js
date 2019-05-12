@@ -33,7 +33,7 @@ app.use(morgan('dev', { stream: logger.stream }));
 server.listen(port, async () => {
   logger.info(`Server started - ${port}`, 1);
 
-  // await rabbitConnection();
+  await rabbitConnection();
 
   let working = false;
   const watchInterval = process.env.WATCH_INTERVAL;
