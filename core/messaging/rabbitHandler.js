@@ -20,6 +20,10 @@ const exchanges = {
     send: 'check_status_request',
     receive: 'check_status_response',
   },
+  sendCommand: {
+    send: 'send_command_request',
+    receive: 'send_command_response',
+  },
 };
 
 const getBatteryStatus = () => {
@@ -59,7 +63,6 @@ const rabbitHandler = async (conn) => {
     if (msg !== null) {
       logInDev(msg);
 
-      // TODO child process to run python file who return the battery status
       // const battery = Math.round(Math.random() * 100);
       const battery = await getBatteryStatus() || 0;
 
@@ -75,6 +78,29 @@ const rabbitHandler = async (conn) => {
     }
   }, { noAck: true });
   /* ======================================= CHECK STATUS ======================================= */
+
+  /* ======================================= SEND COMMAND ======================================= */
+  channel.assertQueue(exchanges.sendCommand.send, { durable: false });
+  channel.consume(exchanges.sendCommand.send, async (msg) => {
+    if (msg !== null) {
+      logInDev(msg);
+      const message = JSON.parse(msg.content.toString());
+
+      const { type, action } = message;
+
+      // TODO child process to manage action
+
+      const data = JSON.stringify({
+        clientID: message.clientID,
+        processID: message.processID,
+        message: { type, action },
+      });
+
+      channel.assertQueue(exchanges.sendCommand.receive, { durable: false });
+      channel.sendToQueue(exchanges.sendCommand.receive, Buffer.from(data));
+    }
+  }, { noAck: true });
+  /* ======================================= SEND COMMAND ======================================= */
 };
 
 export default rabbitHandler;
