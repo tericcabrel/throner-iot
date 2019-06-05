@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import random;
 
-battery = random.randint(1,101)
+battery = random.uniform(9,12.6)
 print(battery)
 exit (0)
 
