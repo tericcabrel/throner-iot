@@ -1,56 +1,30 @@
-# express-mongo-mocha-boilerplate
+# Throner IOT
 
-This is a full stack boilerplate project with ExpressJS + MongoDB + Mocha
+Node.js app hosted in Raspberry Pi who communicates with client web application 
 
-+ express
-+ mongoose
-+ babel-cli
-+ winston and morgan for logging
-+ Async/Await
-+ mocha
+### Description
+It exchanges message with the web app application through AMQP protocol. 
 
-## Installation
+* **Send battery status:** It node.js child process to execute a python script who get battery status, retrieve the result send to the client.
+* **Upload picture:** When the application starts, a function is executed to watch new picture taken by the camera of the drone in pictures directory and upload it to the server through HTTP. The picture will be displayed on a web interface.
+* **Get GPS Position:** Still using child_process to get GPS position of the drone and send to the server through HTTP. We will this the path of the drone on a Map.
+* **Receive command to execute:** It receives message through AMQP who content a command to be executed by the drone. The command can be : **Land, Take off, Turn to left, Turn to right, Move up, Move down**
 
-Clone the repository and run `npm install`
-
+### Installation
 ```
-git clone https://github.com/ul2002/express-mongo-mocha-boilerplate.git
-npm install
+git clone https://github.com/tericcabrel/throner-iot.git
+yarn install
+cp .env.example .env
+nano .env
 ```
 
-## Starting the server
-
+### Start the server
 ```
-npm start
+yarn start
 ```
 
 The server will run on port 5991. You can change this by editing `.env` file.
 
-## Run server in production with Docker
-
-```
-npm run build
-```
-## Run Api Designer
-
-```
-npm run api-designer
-```
-## Run Tests
-
-```
-npm test
-```
-
-
-After npm building the project, go to project root directory, open shell and run:
-```
-docker build -t express-mongo-mocha-boilerplate .
-```
-
-Instructions about running the container are available [here](https://hub.docker.com/r/tomyitav/express-es6-starter/)
-
-## Debugging with Webstorm
-
-Set babel-node executable as the node interpreter.
-Pass node parameters of --preset=babel-preset-es2015
+### Project
+To view all the repositories involved on this project, follow the link below<br>
+[View Throner project](https://github.com/tericcabrel/throner)
